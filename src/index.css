@@ -1,6 +1,6 @@
 :root {
   font-family: Roboto, sans-serif;
-  font-size: 60px;
+  font-size: 3rem;
   line-height: 1.2em;
   font-weight: 400;
 
@@ -9,9 +9,9 @@
   padding: 2rem;
   text-align: center;
 
-  color-scheme: light dark;
+  /* color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #242424; */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -20,7 +20,7 @@
   -webkit-text-size-adjust: 100%;
 }
 
-@media (prefers-color-scheme: light) {
+/* @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
@@ -30,5 +30,5 @@
   }
   button {
     background-color: #f9f9f9;
-  }
-}
+  } 
+}*/
