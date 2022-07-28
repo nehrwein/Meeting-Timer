@@ -5,14 +5,14 @@ import AgendaProvider from "./context/AgendaContext";
 
 const App = () => {
   return (
+    <AgendaProvider>
       <BrowserRouter>
-        <Routes>
-          <AgendaProvider>
+        <Routes>    
             <Route path="/" element={<Start />} />
             <Route path="/agenda" element={<Agenda />} />
-          </AgendaProvider>
         </Routes>
       </BrowserRouter>
+    </AgendaProvider>
   )
 }
 

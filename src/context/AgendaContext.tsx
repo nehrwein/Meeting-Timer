@@ -4,7 +4,22 @@ import { AgendaContextType, AgendaContextProviderProps, AgendaItem } from "../@t
 export const AgendaContext = createContext<AgendaContextType | null>(null);
 
 const AgendaProvider = ({ children }: AgendaContextProviderProps) => {
-  const [agenda, setAgenda] = useState<AgendaItem[]>([])
+  const [agenda, setAgenda] = useState<AgendaItem[]>([
+    {
+      id: 1,
+      duration: 10,
+      subject: 'Vatten',
+      idb: 'I',
+      responsible: 'Joel'
+    },
+    {
+      id: 2,
+      duration: 15,
+      subject: 'Coding',
+      idb: 'D',
+      responsible: 'Birgit'
+    },
+  ])
 
   const addItem = (item: AgendaItem) => {
     const newItem: AgendaItem = {
