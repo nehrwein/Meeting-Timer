@@ -10,7 +10,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
 
-const ItemList = () => {
+const AgendaTable = () => {
   const { agenda } = useContext(AgendaContext) as AgendaContextType;
 
   return (
@@ -44,4 +44,4 @@ const ItemList = () => {
   )
 }
 
-export default ItemList
+export default AgendaTable

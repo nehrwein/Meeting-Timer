@@ -1,11 +1,18 @@
-import ItemList from '../components/ItemList';
+import AgendaTable from '../components/AgendaTable';
+import { Stack, Typography } from '@mui/material';
+import { DeleteButton } from '../components/Buttons';
 
 
 const Start = () => {
   return (
     <>
-      <h1>Agenda</h1>
-      <ItemList />
+      <Typography variant="h4" component="h1" gutterBottom>
+        Agenda
+      </Typography>
+      <AgendaTable />
+      <Stack direction="row" spacing={2}>
+        <DeleteButton />
+      </Stack>
     </>
   )
 }
