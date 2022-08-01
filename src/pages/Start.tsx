@@ -1,7 +1,6 @@
 import AgendaTable from '../components/AgendaTable';
-import { Stack, Typography } from '@mui/material';
-import { DeleteButton } from '../components/Buttons';
-
+import { Typography } from '@mui/material';
+import AddItem from '../components/AddItem';
 
 const Start = () => {
   return (
@@ -10,9 +9,7 @@ const Start = () => {
         Agenda
       </Typography>
       <AgendaTable />
-      <Stack direction="row" spacing={2}>
-        <DeleteButton />
-      </Stack>
+      <AddItem />
     </>
   )
 }

@@ -1,5 +1,6 @@
 import React from "react";
 
+// types for context
 export interface AgendaItem {
   id: number;
   duration: number;
@@ -9,7 +10,7 @@ export interface AgendaItem {
 }
 
 export type AgendaContextType = {
-  agenda: AgendaItem[];
+  agenda: AgendaItem[],
   addItem: (item: AgendaItem) => void;
 }
 
