@@ -9,6 +9,9 @@ const Start = () => {
         Agenda
       </Typography>
       <AgendaTable />
+      <Typography variant="h6" component="h2" gutterBottom>
+        Add subject
+      </Typography>
       <AddItem />
     </>
   )

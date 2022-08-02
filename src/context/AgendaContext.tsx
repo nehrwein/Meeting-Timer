@@ -1,25 +1,25 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import { AgendaContextType, AgendaContextProviderProps, AgendaItem } from "../@types/agenda";
+
 
 export const AgendaContext = createContext<AgendaContextType | null>(null);
 
 const AgendaProvider = ({ children }: AgendaContextProviderProps) => {
-  const [agenda, setAgenda] = useState<AgendaItem[]>([
-    {
-      id: 1,
-      duration: 10,
-      subject: 'Vatten',
-      idb: 'I',
-      responsible: 'Joel'
-    },
-    {
-      id: 2,
-      duration: 15,
-      subject: 'Coding',
-      idb: 'D',
-      responsible: 'Birgit'
-    },
-  ])
+  const [agenda, setAgenda] = useState<AgendaItem[]>([])
+
+  useEffect(() => {
+    const agendaStorage = JSON.parse(localStorage.getItem('agenda') || '');
+    if (agendaStorage.length >= 1) {
+      setAgenda(agendaStorage)
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('agenda', JSON.stringify(agenda));
+  }, [agenda])
+
+
+
 
   const addItem = (item: AgendaItem) => {
     const newItem: AgendaItem = {
@@ -36,7 +36,7 @@ const AgendaProvider = ({ children }: AgendaContextProviderProps) => {
   return (
     <AgendaContext.Provider value={{ agenda, addItem }}>
       {children}
-    </AgendaContext.Provider>  
+    </AgendaContext.Provider>
   )
 }
 

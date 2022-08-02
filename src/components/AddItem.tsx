@@ -4,7 +4,6 @@ import AddIcon from '@mui/icons-material/Add';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { AgendaContextType, AgendaItem } from '../@types/agenda';
 import { AgendaContext } from '../context/AgendaContext';
-import { SpaRounded } from '@mui/icons-material';
 
 // const speakers = [
 //   {
@@ -42,6 +41,7 @@ const AddItem: FC = () => {
         <Controller 
           name="subject" 
           control={control} 
+          defaultValue=''
           render={({ field }) => (
             <TextField 
               {...field} 
@@ -72,6 +72,7 @@ const AddItem: FC = () => {
         <Controller 
           name="responsible" 
           control={control} 
+          defaultValue=''
           render={({ field }) => (
             <TextField 
               {...field} 
@@ -87,6 +88,7 @@ const AddItem: FC = () => {
         <Controller 
           name="idb" 
           control={control} 
+          defaultValue=''
           render={({ field }) => (
             <TextField 
               {...field} 
@@ -99,7 +101,12 @@ const AddItem: FC = () => {
               margin='dense'
             />
           )} />
-        <input type="submit" />
+        <Button 
+          type="submit"
+          variant='outlined'
+        >
+          Add
+        </Button>
       </form>
 
       {/* <FormGroup row>
