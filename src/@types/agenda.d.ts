@@ -12,6 +12,7 @@ export interface AgendaItem {
 export type AgendaContextType = {
   agenda: AgendaItem[],
   addItem: (item: AgendaItem) => void;
+  clearList: () => void;
 }
 
 export type AgendaContextProviderProps = {

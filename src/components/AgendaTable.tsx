@@ -8,10 +8,11 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { Button } from '@mui/material';
 
 
 const AgendaTable = () => {
-  const { agenda } = useContext(AgendaContext) as AgendaContextType;
+  const { agenda, clearList } = useContext(AgendaContext) as AgendaContextType;
 
   return (
     <>
@@ -40,6 +41,12 @@ const AgendaTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      <Button
+        variant='outlined'
+        onClick={() => clearList()}
+      >
+        clear list
+      </Button>
     </>
   )
 }

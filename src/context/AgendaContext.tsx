@@ -18,9 +18,6 @@ const AgendaProvider = ({ children }: AgendaContextProviderProps) => {
     localStorage.setItem('agenda', JSON.stringify(agenda));
   }, [agenda])
 
-
-
-
   const addItem = (item: AgendaItem) => {
     const newItem: AgendaItem = {
       id: Math.random(),
@@ -33,8 +30,12 @@ const AgendaProvider = ({ children }: AgendaContextProviderProps) => {
     setAgenda([...agenda, newItem])
   }
 
+  const clearList = () => {
+    setAgenda([])
+  }
+
   return (
-    <AgendaContext.Provider value={{ agenda, addItem }}>
+    <AgendaContext.Provider value={{ agenda, addItem, clearList }}>
       {children}
     </AgendaContext.Provider>
   )
