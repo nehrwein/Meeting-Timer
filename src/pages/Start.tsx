@@ -1,5 +1,5 @@
 import AgendaTable from '../components/AgendaTable';
-import { Typography } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 import AddItem from '../components/AddItem';
 
 const Start = () => {
@@ -9,10 +9,13 @@ const Start = () => {
         Agenda
       </Typography>
       <AgendaTable />
-      <Typography variant="h6" component="h2" gutterBottom>
-        Add subject
-      </Typography>
-      <AddItem />
+      <Box mt={5}>
+        <Typography variant="h6" component="h2" gutterBottom>
+          Add subject
+        </Typography>
+        <AddItem />
+      </Box>
+
     </>
   )
 }

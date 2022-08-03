@@ -1,5 +1,5 @@
 import React, {  FC, useContext, useState } from 'react'
-import { TextField, MenuItem, Button, FormGroup } from '@mui/material';
+import { TextField, MenuItem, Button, Box } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { AgendaContextType, AgendaItem } from '../@types/agenda';
@@ -38,6 +38,7 @@ const AddItem: FC = () => {
     <>
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         {/* The Controller controls the Mui-TextField within. The TextField receives the Controllers props via field and then can be additionally customized */}
+        <Box mb={3}>
         <Controller 
           name="subject" 
           control={control} 
@@ -101,9 +102,11 @@ const AddItem: FC = () => {
               margin='dense'
             />
           )} />
+        </Box>
         <Button 
           type="submit"
-          variant='outlined'
+          variant='contained'
+          size='small'
         >
           Add
         </Button>

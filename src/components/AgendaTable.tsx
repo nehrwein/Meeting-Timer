@@ -52,7 +52,8 @@ const AgendaTable = () => {
         </Table>
       </TableContainer>
       <Button
-        variant='outlined'
+        variant='contained'
+        size='small'
         onClick={() => clearList()}
       >
         clear list
