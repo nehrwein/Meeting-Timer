@@ -34,8 +34,14 @@ const AgendaProvider = ({ children }: AgendaContextProviderProps) => {
     setAgenda([])
   }
 
+  const deleteItem = (id: number) => {
+    const filteredAgenda = agenda.filter((item) => item.id !== id)
+    setAgenda(filteredAgenda)
+  }
+
+
   return (
-    <AgendaContext.Provider value={{ agenda, addItem, clearList }}>
+    <AgendaContext.Provider value={{ agenda, addItem, clearList, deleteItem }}>
       {children}
     </AgendaContext.Provider>
   )

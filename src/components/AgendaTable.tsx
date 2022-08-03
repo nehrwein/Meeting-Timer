@@ -8,11 +8,12 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { Button } from '@mui/material';
+import { Button, IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 const AgendaTable = () => {
-  const { agenda, clearList } = useContext(AgendaContext) as AgendaContextType;
+  const { agenda, clearList, deleteItem } = useContext(AgendaContext) as AgendaContextType;
 
   return (
     <>
@@ -36,6 +37,15 @@ const AgendaTable = () => {
                 <TableCell align="right">{item.duration}</TableCell>
                 <TableCell align="right">{item.idb}</TableCell>
                 <TableCell align="right">{item.responsible}</TableCell>
+                <TableCell align="right">
+                  <IconButton 
+                    aria-label="delete"
+                    size='small'
+                    onClick={() => deleteItem(item.id)}
+                  >
+                    <DeleteIcon fontSize="inherit" />
+                  </IconButton>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

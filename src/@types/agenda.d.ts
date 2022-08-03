@@ -13,6 +13,7 @@ export type AgendaContextType = {
   agenda: AgendaItem[],
   addItem: (item: AgendaItem) => void;
   clearList: () => void;
+  deleteItem: (id: number) => void;
 }
 
 export type AgendaContextProviderProps = {
