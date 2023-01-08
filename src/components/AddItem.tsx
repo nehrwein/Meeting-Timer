@@ -1,77 +1,127 @@
-import React, {  FC, useContext, useState } from 'react'
+import React, {  FC, useContext, useEffect } from 'react'
 import { TextField, MenuItem, Button, Box } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { AgendaContextType, AgendaItem } from '../@types/agenda';
 import { AgendaContext } from '../context/AgendaContext';
 
-// const speakers = [
-//   {
-//     value: 'Joel',
-//     label: 'Joel',
-//   },
-//   {
-//     value: 'Brittney',
-//     label: 'Brittney',
-//   },
-//   {
-//     value: 'Karl Gustav',
-//     label: 'Karl Gustav',
-//   },
-// ];
 
 const AddItem: FC = () => {
   const { addItem } = useContext(AgendaContext) as AgendaContextType
 
-  const { register, control, handleSubmit, formState: { errors} } = useForm<AgendaItem>();
+  const initialState: AgendaItem = {
+    id: 0,
+    duration: 0,
+    subject: '',
+    idb: '',
+    responsible: ''
+  }
+  
+  const IDB = [
+    {
+      value: 'I',
+      label: 'Information'
+    }, 
+    {
+      value: 'D',
+      label: 'Diskussion'
+    }, 
+    {
+      value: 'B',
+      label: 'Beslut'
+    }
+  ]
+
+  const { register, control, handleSubmit, reset, formState: { isSubmitSuccessful, errors} } = useForm<AgendaItem>();
 
   const formSubmitHandler: SubmitHandler<AgendaItem> = (data: AgendaItem) => {
     addItem(data)
   }
-  // const [speaker, setSpeaker] = useState('')
 
-  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setSpeaker(event.target.value)
-  // }
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset(initialState)
+    }
+  }, [isSubmitSuccessful])
+
+  console.log('hi: ', errors)
 
   return (
     <>
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         {/* The Controller controls the Mui-TextField within. The TextField receives the Controllers props via field and then can be additionally customized */}
-        <Box mb={3}>
+        <Box 
+          component="form"
+          mb={4}
+        >
         <Controller 
-          name="subject" 
+          {...register("subject", { required: true })} 
+          control={control} 
+          defaultValue=''
+          render={({ field }) => (
+            <TextField 
+              {...field}
+              label='Subject'
+              required
+              variant='standard'
+              error={!!errors.subject}
+              helperText={errors.subject ? 'Please fill out' : ''}
+              sx={{
+                mr: 2,
+                mb: 2,  
+                width: 1/3
+              }}
+            />
+          )} />
+        <Controller 
+          {...register("duration", { required: true })} 
+          control={control}
+          render={({ field }) => (
+            <TextField 
+              {...field}
+              
+              type='number'
+              required
+              label='Duration'
+              variant='standard'
+              error={!!errors.duration}
+              helperText={errors.duration ? 'Please fill out' : ''}
+              sx={{
+                mr: 2,
+                mb: 2, 
+                width: 1/6
+              }}
+            />
+          )} />
+        <Controller 
+          {...register("idb", { required: true })} 
           control={control} 
           defaultValue=''
           render={({ field }) => (
             <TextField 
               {...field} 
-              label='Subject'
+              type='text'
+              select
               required
-              variant='outlined'
-              error={!!errors.subject}
-              helperText={errors.subject ? errors.subject?.message : ''}
-              fullWidth
-              margin='dense'
-            />
+              label='IDB'
+              variant='standard'
+              error={!!errors.idb}
+              helperText={errors.idb ? 'Please fill out' : ''}
+              sx={{
+                mr: 2,
+                mb: 2, 
+                width: 1/6
+              }}
+            >
+              {IDB.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </ TextField>  
           )} />
         <Controller 
-          name="duration" 
-          control={control} 
-          render={({ field }) => (
-            <TextField 
-              {...field} 
-              type='number'
-              required
-              label='Duration'
-              variant='outlined'
-              error={!!errors.duration}
-              helperText={errors.duration ? errors.duration?.message : ''}
-              margin='dense'
-            />
-          )} />
-        <Controller 
-          name="responsible" 
+          {...register("responsible", { required: true })}  
           control={control} 
           defaultValue=''
           render={({ field }) => (
@@ -80,26 +130,12 @@ const AddItem: FC = () => {
               type='text'
               required
               label='Responsible'
-              variant='outlined'
+              variant='standard'
               error={!!errors.responsible}
-              helperText={errors.responsible ? errors.responsible?.message : ''}
-              margin='dense'
-            />
-          )} />
-        <Controller 
-          name="idb" 
-          control={control} 
-          defaultValue=''
-          render={({ field }) => (
-            <TextField 
-              {...field} 
-              type='text'
-              required
-              label='IDB'
-              variant='outlined'
-              error={!!errors.idb}
-              helperText={errors.idb ? errors.idb?.message : ''}
-              margin='dense'
+              helperText={errors.responsible ? 'Please fill out' : ''}
+              sx={{
+                width: 0.3
+              }}
             />
           )} />
         </Box>
@@ -107,46 +143,11 @@ const AddItem: FC = () => {
           type="submit"
           variant='contained'
           size='small'
+          color='primary'
         >
           Add
         </Button>
       </form>
-
-      {/* <FormGroup row>
-        <TextField
-            required
-            id="speaker"
-            select
-            label="Speaker"
-            value={speaker}
-            onChange={handleChange}
-            helperText="Please select the speaker"
-          >
-            {speakers.map((option) => (
-              <MenuItem 
-                key={option.value} 
-                value={option.value}
-              >
-                {option.label}
-              </MenuItem>
-            ))}
-        </TextField>
-        <TextField
-          required
-          id="subject"
-          label="Subject"
-        />
-                <Button 
-          color="secondary" 
-          size="large"
-          variant="outlined"
-          startIcon={<AddIcon />}
-          onClick={() => {
-            alert('clicked');
-          }}
-        >Add
-        </Button>
-      </FormGroup> */}
     </>
   )
 }

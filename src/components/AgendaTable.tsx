@@ -18,7 +18,7 @@ const AgendaTable = () => {
   return (
     <>
       <TableContainer>
-        <Table sx={{minwidth: 650}} aria-label="table for Agenda">
+        <Table sx={{minwidth: 650, marginBottom: '16px'}} aria-label="table for Agenda">
           <TableHead>
             <TableRow>
               <TableCell>Subject</TableCell>
