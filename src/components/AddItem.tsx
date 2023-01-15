@@ -96,7 +96,6 @@ const AddItem: FC = () => {
       <form>
         {/* The Controller controls the Mui-TextField within. The TextField receives the Controllers props via field and then can be additionally customized */}
         <Box 
-          component="form"
           mb={4}
         >
         <Controller 
