@@ -3,7 +3,7 @@ import React from "react";
 // types for context
 export interface AgendaItem {
   id: number;
-  duration: number;
+  duration: number | string;
   subject: string;
   idb: string;
   responsible: string;

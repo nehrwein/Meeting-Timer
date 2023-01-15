@@ -1,5 +1,5 @@
-import React, {  FC, useContext, useEffect } from 'react'
-import { TextField, MenuItem, Button, Box } from '@mui/material';
+import React, {  FC, useContext, useEffect, useRef, useState } from 'react'
+import { TextField, MenuItem, IconButton, Box } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { AgendaContextType, AgendaItem } from '../@types/agenda';
@@ -9,9 +9,9 @@ import { AgendaContext } from '../context/AgendaContext';
 const AddItem: FC = () => {
   const { addItem } = useContext(AgendaContext) as AgendaContextType
 
-  const initialState: AgendaItem = {
+  const initialState = {
     id: 0,
-    duration: 0,
+    duration: '',
     subject: '',
     idb: '',
     responsible: ''
@@ -32,6 +32,50 @@ const AddItem: FC = () => {
     }
   ]
 
+  const duration = [
+    {
+      value: 5,
+      label: '5min'
+    },
+    {
+      value: 10,
+      label: '10min'
+    },
+    {
+      value: 15,
+      label: '15min'
+    },
+    { 
+      value: 20,
+      label: '20min'
+    },
+    {
+      value: 25,
+      label: '25min'
+    },
+    {
+      value: 30,
+      label: '30min'
+    },
+    {
+      value: 45,
+      label: '45min'
+    },
+    {
+      value: 60,
+      label: '1h'
+    },
+    {
+      value: 90,
+      label: '1.5h'
+    },
+    {
+      value: 120,
+      label: '2h'
+    }
+  ]
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const { register, control, handleSubmit, reset, formState: { isSubmitSuccessful, errors} } = useForm<AgendaItem>();
 
   const formSubmitHandler: SubmitHandler<AgendaItem> = (data: AgendaItem) => {
@@ -41,14 +85,15 @@ const AddItem: FC = () => {
   useEffect(() => {
     if (isSubmitSuccessful) {
       reset(initialState)
+      if (inputRef.current != null) {
+        inputRef.current.focus();
+      }
     }
   }, [isSubmitSuccessful])
 
-  console.log('hi: ', errors)
-
   return (
     <>
-      <form onSubmit={handleSubmit(formSubmitHandler)}>
+      <form>
         {/* The Controller controls the Mui-TextField within. The TextField receives the Controllers props via field and then can be additionally customized */}
         <Box 
           component="form"
@@ -63,6 +108,8 @@ const AddItem: FC = () => {
               {...field}
               label='Subject'
               required
+              inputRef={inputRef}
+              autoFocus
               variant='standard'
               error={!!errors.subject}
               helperText={errors.subject ? 'Please fill out' : ''}
@@ -76,12 +123,14 @@ const AddItem: FC = () => {
         <Controller 
           {...register("duration", { required: true })} 
           control={control}
+          defaultValue=''
           render={({ field }) => (
             <TextField 
               {...field}
               
               type='number'
               required
+              select
               label='Duration'
               variant='standard'
               error={!!errors.duration}
@@ -91,7 +140,13 @@ const AddItem: FC = () => {
                 mb: 2, 
                 width: 1/6
               }}
-            />
+            >
+              {duration.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </ TextField> 
           )} />
         <Controller 
           {...register("idb", { required: true })} 
@@ -126,7 +181,7 @@ const AddItem: FC = () => {
           defaultValue=''
           render={({ field }) => (
             <TextField 
-              {...field} 
+              {...field}
               type='text'
               required
               label='Responsible'
@@ -134,19 +189,23 @@ const AddItem: FC = () => {
               error={!!errors.responsible}
               helperText={errors.responsible ? 'Please fill out' : ''}
               sx={{
-                width: 0.3
+                width: 1/6
               }}
             />
           )} />
+          <IconButton 
+            aria-label='add'
+            type='submit'
+            onClick={handleSubmit(formSubmitHandler)}
+            sx={{
+              color: '#0099bb',
+              marginLeft: '25px',
+              marginTop: '15px'
+            }}
+            >
+            <AddIcon />
+          </IconButton>
         </Box>
-        <Button 
-          type="submit"
-          variant='contained'
-          size='small'
-          color='primary'
-        >
-          Add
-        </Button>
       </form>
     </>
   )
