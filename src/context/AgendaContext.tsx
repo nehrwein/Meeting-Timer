@@ -1,21 +1,24 @@
-import { createContext, useState, useEffect } from "react";
-import { AgendaContextType, AgendaContextProviderProps, AgendaItem } from "../@types/agenda";
+import { createContext, useState, useEffect } from 'react'
+import {
+  AgendaContextType,
+  AgendaContextProviderProps,
+  AgendaItem,
+} from '../@types/agenda'
 
-
-export const AgendaContext = createContext<AgendaContextType | null>(null);
+export const AgendaContext = createContext<AgendaContextType | null>(null)
 
 const AgendaProvider = ({ children }: AgendaContextProviderProps) => {
   const [agenda, setAgenda] = useState<AgendaItem[]>([])
 
   useEffect(() => {
-    const agendaStorage = JSON.parse(localStorage.getItem('agenda') || '');
-    if (agendaStorage.length >= 1) {
+    if (localStorage.length >= 1) {
+      const agendaStorage = JSON.parse(localStorage.getItem('agenda') || '')
       setAgenda(agendaStorage)
     }
   }, [])
 
   useEffect(() => {
-    localStorage.setItem('agenda', JSON.stringify(agenda));
+    localStorage.setItem('agenda', JSON.stringify(agenda))
   }, [agenda])
 
   const addItem = (item: AgendaItem) => {
@@ -24,7 +27,7 @@ const AgendaProvider = ({ children }: AgendaContextProviderProps) => {
       duration: item.duration,
       subject: item.subject,
       idb: item.idb,
-      responsible: item.responsible
+      responsible: item.responsible,
     }
 
     setAgenda([...agenda, newItem])
@@ -38,7 +41,6 @@ const AgendaProvider = ({ children }: AgendaContextProviderProps) => {
     const filteredAgenda = agenda.filter((item) => item.id !== id)
     setAgenda(filteredAgenda)
   }
-
 
   return (
     <AgendaContext.Provider value={{ agenda, addItem, clearList, deleteItem }}>
