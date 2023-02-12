@@ -1,7 +1,9 @@
 import AgendaTable from '../components/AgendaTable';
 import { Typography, Box, Paper, Button } from '@mui/material';
 import AddItem from '../components/AddItem';
-import DeleteAllEntries from '../components/Test';
+import DeleteAllEntries from '../components/DeleteAllEntries';
+import { Link } from 'react-router-dom';
+import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 
 
 const Start = () => {
@@ -60,6 +62,17 @@ const Start = () => {
             Agenda
           </Typography>
           <DeleteAllEntries />
+          <Button
+           component={Link} to="/timer"
+           sx={{
+              color: '#0099bb',
+              marginLeft: '25px',
+              marginBottom: '2px'
+            }}
+            startIcon={<AccessAlarmIcon fontSize='large'/>}
+          >
+            Start
+          </Button>
           <AgendaTable />
         </Paper>
       </Box>

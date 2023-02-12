@@ -1,0 +1,14 @@
+.timer-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  user-select: none;
+}
+
+svg {
+  width: 800px;
+  height: 800px;
+}

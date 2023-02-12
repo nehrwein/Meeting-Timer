@@ -4,6 +4,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Start from "./pages/Start";
 import Agenda from "./pages/Agenda";
 import AgendaProvider from "./context/AgendaContext";
+import Timer from "./pages/Timer";
 
 const darkTheme = createTheme({
   palette: {
@@ -20,6 +21,7 @@ const App = () => {
           <Routes>    
               <Route path="/" element={<Start />} />
               <Route path="/agenda" element={<Agenda />} />
+              <Route path="/timer" element={<Timer />} />
           </Routes>
         </BrowserRouter>
       </AgendaProvider>
